@@ -1,21 +1,31 @@
 "use client";
 import { API_URL } from "@/constants";
-import { Button, Input, Link, user } from "@heroui/react";
+import { Button, Input, Link, Spinner, user } from "@heroui/react";
 import axios from "axios";
+import { useState } from "react";
+import  { useRouter } from "next/navigation";
 
 export default function LoginPage(){
+    const [submitting, setSubmitting] = useState(false)
+    const router = useRouter()
     const handleSubmit = async (e: React.FormEvent) => {
+        setSubmitting(true);
         e.preventDefault()
         const formData = new FormData(e.target)
         let authData: any = {}
         authData.userEmail = formData.get("userEmail")
         authData.userPassword = formData.get("userPassword")
-        const { data } = await axios.post(`${API_URL}/auth/login`, {
-            ...authData
-        },{
-            withCredentials: true
-        })
-        console.log(data)
+        try{
+            const response = await axios.post(`${API_URL}/auth/login`, {
+                ...authData
+            },{
+                withCredentials: true
+            })
+            if(response.status === 201) router.push("/dashboard")
+            setSubmitting(false);
+        }catch (e) {
+            setSubmitting(false);
+        }
     }
     return (
     <form className="bg-orange-500 px-10 py-2 rounded-md" onSubmit={handleSubmit}>
@@ -27,7 +37,12 @@ export default function LoginPage(){
         </div>
 
         <div className="flex flex-col gap-2 items-center">
-            <Button color="primary" type="submit">Iniciar sesión</Button>
+            <Button 
+            color="primary" 
+            type="submit" 
+            disabled={submitting}>
+                {submitting? <Spinner size='md'/> : "Iniciar sesión"}
+            </Button>
             <p className="text-white">¿No tienes cuenta? <Link href="/signup" className="text-red-600 underline">Registrate</Link></p>
         </div>
     </form>
