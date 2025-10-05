@@ -5,8 +5,8 @@ export interface Location{
     locationLatLng: number[];
     // manager: Manager;
     // region: Region;
-    employees: Employee[];
-    manager?: any;
+    employees?: Employee[];
+    manager?: Manager;
     region?: any;
 }
 
@@ -21,4 +21,14 @@ export interface Employee{
     user?: any;
 
     // user: User;
+}
+
+export interface Manager{
+    managerId: string;
+    managerFullName: string;
+    managerSalary: number;
+    managerEmail: string;
+    managerPhonenumber: string;
+    location: Location;
+    user?: any;
 }
