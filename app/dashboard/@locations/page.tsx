@@ -9,12 +9,24 @@ const LocationsPage = async ({searchParams}:{
 }) => {
     const userCoookies = cookies()
     const token = userCoookies.get(TOKEN_NAME)?.value
-    const {data} =await axios.get<Location[]>("http://127.0.0.1:4000/locations", 
+    let {data} =await axios.get<Location[]>(
+        "http://127.0.0.1:4000/locations", 
         {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }}
-    )
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+
+    data = [
+        {
+            locationId: 0,
+            locationName: "Ninguna",
+            locationLatLng: [0, 0],
+            locationAddress: "No existe",
+        },
+        ...data
+    ]
 
     return (
     <div className="w-8/12">
