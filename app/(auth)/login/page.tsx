@@ -1,7 +1,6 @@
 "use client";
 import { API_URL } from "@/constants";
-import { Button, Input, Link, Spinner, user } from "@heroui/react";
-import axios from "axios";
+import { Button, Input, Link, Spinner } from "@heroui/react";
 import { useState } from "react";
 import  { useRouter } from "next/navigation";
 
@@ -16,16 +15,17 @@ export default function LoginPage(){
         authData.userEmail = formData.get("userEmail")
         authData.userPassword = formData.get("userPassword")
         try{
-            const response = await axios.post(`${API_URL}/auth/login`, {
-                ...authData
-            },{
-                withCredentials: true
+            const response = await fetch(`${API_URL}/auth/login`,{
+                method: "POST",
+                body: JSON.stringify(authData),
+                credentials: "include",
             })
-            if(response.status === 201) router.push("/dashboard")
+            if(response.status === 201) router.push(`/dashboard`)
             setSubmitting(false);
         }catch (e) {
             setSubmitting(false);
         }
+        return;
     }
     return (
     <form className="bg-orange-500 px-10 py-2 rounded-md" onSubmit={handleSubmit}>
