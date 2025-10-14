@@ -40,15 +40,15 @@ const LocationsPage = async ({searchParams}:{
             <div className="w-1/2 my-10">
                 <SelectLocation locations={data} store={searchParams?.store}/>
             </div>
-            <div className="w-1/2 my-10 flex flex-col items-center">
-                <div className="w-8/12">
-                    <LocationCard store={searchParams.store}/>
-                </div>
-                <div className="w-8/12">
-                    <FormNewLocation searchParams={searchParams}/>
-                </div>
+            <div className="w-8/12">
+                <LocationCard store={searchParams.store}/>
+            </div>
+            <div className="w-6/12">
+                <FormNewLocation searchParams={searchParams}/>
+            </div>
+            <div className="flex flex-row flex-grow-0 gap-10 items-center">
                 <DeleteLocationButton store={searchParams.store}/>
-                <UpdateLocation>
+                <UpdateLocation store={searchParams.store}>
                     <FormUpdateLocation store={searchParams.store}/>
                 </UpdateLocation>
             </div>

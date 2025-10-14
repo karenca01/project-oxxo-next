@@ -31,12 +31,13 @@ export default async function FormNewLocation({store}: {store: string | string[]
     let foundManager = dataManagers.find((manager)=>manager.managerId === foundLocation?.manager?.managerId)
     return (
         <form action={updateWithStoreId} className="bg-orange-400 py-2 px-4 flex flex-col gap-6 w-full rounded-lg">
-            <Input defaultValue={foundLocation?.locationName} label="Nombre" placeholder="Oxxo Juriquilla" name="locationName" />
-            <Input defaultValue={foundLocation?.locationAddress} label="Dirección" placeholder="Av de la Luz S/N" name="locationAddress" />
-            <Input defaultValue={foundLocation?.locationLatLng[0].toString()} label="Latitud" placeholder="-120" name="locationLat" />
-            <Input defaultValue={foundLocation?.locationLatLng[1].toString()} label="Longitud" placeholder="20" name="locationLng" />
+            <h1 className="text-3xl text-white text-center">Editar tienda</h1>
+            <Input required={true} defaultValue={foundLocation?.locationName} label="Nombre" placeholder="Oxxo Juriquilla" name="locationName" />
+            <Input required={true} defaultValue={foundLocation?.locationAddress} label="Dirección" placeholder="Av de la Luz S/N" name="locationAddress" />
+            <Input required={true} defaultValue={foundLocation?.locationLatLng[0].toString()} label="Latitud" placeholder="-120" name="locationLat" />
+            <Input required={true} defaultValue={foundLocation?.locationLatLng[1].toString()} label="Longitud" placeholder="20" name="locationLng" />
             <SelectManager defaultManager={foundManager?.managerId} managers={dataManagers} locations={dataLocations}/>
-            <Button type="submit" color="primary">Subir</Button>
+            <Button type="submit" color="primary">Actualizar</Button>
         </form>
     )
 }
