@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export default function ManagerCard({manager}: {manager: Manager}){
     return(
-        <Card className="mx-20 py-2 text-center text-center">
-            <CardHeader className="text-center">
+        <Card className="mx-20 py-2 text-center">
+            <CardHeader>
                 <p className="text-4xl"><b>{manager.managerFullName}</b></p>
             </CardHeader>
             <Divider/>
