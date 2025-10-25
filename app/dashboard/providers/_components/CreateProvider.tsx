@@ -10,7 +10,7 @@ import {
 } from "@heroui/react";
 import { LuPlus } from 'react-icons/lu';
 
-export default function NewProvider({children}: {children: ReactNode}) {
+export default function CreateProvider({children}: {children: ReactNode}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (

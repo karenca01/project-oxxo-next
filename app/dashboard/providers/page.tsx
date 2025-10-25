@@ -3,24 +3,25 @@ import { authHeaders } from "@/helpers/authHeaders";
 import { Provider } from "@/entities";
 import ProviderCard from "./_components/ProviderCard";
 import Link from "next/link";
-import { Button, Form } from "@heroui/react";
-import { LuPlus } from "react-icons/lu";
-import FormNewProvider from "./_components/FormNewProvider";
-import NewProvider from "./_components/NewProvider";
+import CreateProvider from "./_components/CreateProvider";
+import FormCreateProvider from "./_components/FormCreateProvider";
 
 const ProviderPage = async () => {
     const response = await fetch(`${API_URL}/providers`,{
         headers: {
             ...authHeaders()
         },
+        next: {
+            tags: ["dashboard:providers"]
+        }
     })
     const providers: Provider[] = await response.json();
 
     return(
         <div className="flex flex-col items-end w-full flex-grow-0 px-10 pt-10 h-[90vh]">
-            <NewProvider>
-                <FormNewProvider/>
-            </NewProvider>
+            <CreateProvider>
+                <FormCreateProvider/>
+            </CreateProvider>
 
             <div className="flex flex-wrap w-full py-20 flex-grow-0 gap-14">
             {providers.map((provider: Provider) => (
