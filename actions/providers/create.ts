@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function createProvider(formData: FormData) {
-  const provider: Record<string, any> = {};
+  let provider: any = {}
 
   for (const key of formData.keys()) {
     provider[key] = formData.get(key);
