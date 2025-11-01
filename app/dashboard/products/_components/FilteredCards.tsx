@@ -11,6 +11,7 @@ import { Select, SelectItem } from "@heroui/react";
 export default function FilteredCards({products, providers}: {products: Product[], providers: Provider[]}){
     const [filtered, setfiltered] = useState<string>("")
     const [provider, setProvider] = useState<string>();
+    const [show, setShow] = useState(false);
     const [productsList, setProductsList] = useState<Product[]>(products)
     useEffect(() => {
         const filteredProducts = products.filter((product)=>{
@@ -19,6 +20,7 @@ export default function FilteredCards({products, providers}: {products: Product[
             }else return false;
         })
         setProductsList(filteredProducts)
+        setShow(true)
     },[filtered, provider])
     return (
         <div className="max-h-[90vh] min-h-[90vh] overflow-y-auto flex flex-col gap-8 border-r-orange-200 border-r-2 pt-10 px-10">
@@ -36,7 +38,7 @@ export default function FilteredCards({products, providers}: {products: Product[
         }}
         label="Nombre del producto"
         />
-            {productsList.map((product)=>{
+            {show && productsList.map((product)=>{
                 return(
                     <Link
                     key={product.productId} 
