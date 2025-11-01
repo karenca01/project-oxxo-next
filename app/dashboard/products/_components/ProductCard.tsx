@@ -9,6 +9,7 @@ export default function ProductCard({product} : {product: Product}){
             <CardBody>
                 <p>Precio: <b>${product.price}</b></p>
                 <p>Proveedor: <b>{product.provider?.providerName}</b></p>
+
             </CardBody>
         </Card>
     )
