@@ -1,21 +1,18 @@
 import { Employee } from "@/entities";
-import { Card, CardFooter, CardBody, CardHeader, Divider } from "@heroui/react";
+import { Card, CardFooter, CardHeader, Divider, Image } from "@heroui/react";
 import { Button } from "@heroui/react";
 import Link from "next/link";
 
-export default function EmployeeCard({employee}: {employee: Employee}){
+export default function EmployeePhotoCard({employee}: {employee: Employee}){
     return(
-        <Card className="size-72 max-h-72">
-            <CardHeader>
-                <h1 className="font-bold text-xl">
+        <Card className="max-h-72" isFooterBlurred>
+            <CardHeader className="absolute top-0 bg-black bg-opacity-25 z-10">
+                <h1 className="font-bold text-xl text-white drop-shadow-sm">
                     {employee.employeeName + " " + employee.employeeLastname}
                 </h1>
             </CardHeader>
             <Divider />
-            <CardBody>
-                <p>Correo: <b>{employee.employeeEmail}</b></p>
-                <p>Número de teléfono: <b>{employee.employeePhonenumber}</b></p>
-            </CardBody>
+            <Image src={employee.employeePhoto} className="z-0" classNames={{ img: "size-72" }}/>
             <CardFooter className="absolute bottom-0 py-2 h-14">
                 <Link href={`/dashboard/employees/${employee.employeeId}`}>
                     <Button variant="ghost">Actualizar datos</Button>
