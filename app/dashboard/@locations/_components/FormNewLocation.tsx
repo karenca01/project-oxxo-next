@@ -15,7 +15,9 @@ export default async function FormNewLocation({searchParams}: {searchParams: {[k
             tags: ["dashboard:locations", "dashboard:locations:managers"]
         }
     })
-    const dataManagers: Manager[] = await responseManagers.json();
+    const managersJson = await responseManagers.json();
+    const dataManagers: Manager[] = managersJson.data ?? [];
+
     const responseLocations = await fetch(`${API_URL}/locations`,{
         headers: {
             ...authHeaders()
@@ -24,7 +26,9 @@ export default async function FormNewLocation({searchParams}: {searchParams: {[k
             tags: ["dashboard:locations"]
         }
     })
-    const dataLocations: Location[] = await responseLocations.json();
+    const locationsJson = await responseLocations.json();
+    const dataLocations: Location[] = locationsJson.data ?? [];
+    
     return (
         <form action={createLocation} className="bg-orange-400 py-2 px-4 flex flex-col gap-6 w-full rounded-lg">
             <h1 className="text-3xl text-white text-center">Crear tienda</h1>
