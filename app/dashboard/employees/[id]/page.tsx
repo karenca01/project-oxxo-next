@@ -16,5 +16,5 @@ export default async function EmployeePage({params}: {params: {id: string}}){
             <EmployeeDataCard employee={employee}/>
             <FormUpdateEmployee employee={employee}/>
         </div>
-    )
+    ) 
 }
